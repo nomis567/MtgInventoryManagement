@@ -1,0 +1,27 @@
+# ── Build stage ──────────────────────────────────────────────────────────────
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+# Copy project files first for better layer caching
+COPY MtgInventoryManagementApi/MtgInventoryManagement.Api/MtgInventoryManagement.Api.csproj \
+     MtgInventoryManagement.Api/
+
+RUN dotnet restore MtgInventoryManagement.Api/MtgInventoryManagement.Api.csproj
+
+# Copy source
+COPY MtgInventoryManagementApi/MtgInventoryManagement.Api/  MtgInventoryManagementApi/MtgInventoryManagement.Api/
+
+RUN dotnet publish MtgInventoryManagementApi/MtgInventoryManagement.Api/MtgInventoryManagement.Api.csproj \
+    -c Release -o /app/publish 
+
+# ── Runtime stage ─────────────────────────────────────────────────────────────
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+WORKDIR /app
+
+COPY --from=build /app/publish ./
+
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "MtgInventoryManagement.Api.dll"]
