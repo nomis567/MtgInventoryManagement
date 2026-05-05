@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="MtgInventoryManagement.Api/MtgInventoryManagement.Api.csproj" />
+  <Project Path="MtgInventoryManagement.Data/MtgInventoryManagement.Data.csproj" />
 </Solution>

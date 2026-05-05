@@ -33,6 +33,13 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     restart: unless-stopped
+    environment:
+      - ConnectionStrings__DatabaseConnection=Host=postgres;Port=5432;Database=mtg_inventory_management;Username=postgres;Password=${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
   postgres_data:
