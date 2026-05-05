@@ -3,12 +3,15 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copy project files first for better layer caching
+COPY MtgInventoryManagementApi/MtgInventoryManagement.Data/MtgInventoryManagement.Data.csproj \
+     MtgInventoryManagement.Data/
 COPY MtgInventoryManagementApi/MtgInventoryManagement.Api/MtgInventoryManagement.Api.csproj \
      MtgInventoryManagement.Api/
 
 RUN dotnet restore MtgInventoryManagement.Api/MtgInventoryManagement.Api.csproj
 
 # Copy source
+COPY MtgInventoryManagementApi/MtgInventoryManagement.Data/  MtgInventoryManagementApi/MtgInventoryManagement.Data/
 COPY MtgInventoryManagementApi/MtgInventoryManagement.Api/  MtgInventoryManagementApi/MtgInventoryManagement.Api/
 
 RUN dotnet publish MtgInventoryManagementApi/MtgInventoryManagement.Api/MtgInventoryManagement.Api.csproj \
