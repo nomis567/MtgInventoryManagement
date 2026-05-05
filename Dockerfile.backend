@@ -7,12 +7,15 @@ COPY MtgInventoryManagementApi/MtgInventoryManagement.Data/MtgInventoryManagemen
      MtgInventoryManagement.Data/
 COPY MtgInventoryManagementApi/MtgInventoryManagement.Api/MtgInventoryManagement.Api.csproj \
      MtgInventoryManagement.Api/
+COPY MtgInventoryManagementApi/MtgInventoryManagement.Service/MtgInventoryManagement.Service.csproj \
+     MtgInventoryManagement.Service/
 
 RUN dotnet restore MtgInventoryManagement.Api/MtgInventoryManagement.Api.csproj
 
 # Copy source
 COPY MtgInventoryManagementApi/MtgInventoryManagement.Data/  MtgInventoryManagementApi/MtgInventoryManagement.Data/
 COPY MtgInventoryManagementApi/MtgInventoryManagement.Api/  MtgInventoryManagementApi/MtgInventoryManagement.Api/
+COPY MtgInventoryManagementApi/MtgInventoryManagement.Service/  MtgInventoryManagementApi/MtgInventoryManagement.Service/
 
 RUN dotnet publish MtgInventoryManagementApi/MtgInventoryManagement.Api/MtgInventoryManagement.Api.csproj \
     -c Release -o /app/publish 

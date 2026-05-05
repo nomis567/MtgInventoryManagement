@@ -13,4 +13,11 @@ public static class DependencyInjection
 
         return services;
     }
+
+	public static IServiceCollection AddDependencyInjection(this IServiceCollection services)
+	{
+		services.AddScoped<ICardRepository, CardRepository>();
+
+		return services;
+	}
 }
