@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MtgInventoryManagementApi.MtgInventoryManagement.Data;
 using MtgInventoryManagementApi.MtgInventoryManagement.Data.Models;
 using Shouldly;
-using Xunit;
 
 namespace MtgInventoryManagement.Data.Tests;
 
@@ -117,7 +112,7 @@ public class CardRepositoryTest : IAsyncLifetime
         await _repository.AddAsync(card);
         await _repository.SaveChangesAsync();
 
-        _context.Cards.Single(c => c.Name == "Dark Ritual").ShouldBeTrue();
+        _context.Cards.Single(c => c.Name == "Dark Ritual").ShouldBe(card);
     }
 
     [Fact]

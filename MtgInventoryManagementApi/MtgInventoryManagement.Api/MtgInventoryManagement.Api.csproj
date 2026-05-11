@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MtgInventoryManagement.Data\MtgInventoryManagement.Data.csproj" />
+    <ProjectReference Include="..\MtgInventoryManagement.Service\MtgInventoryManagement.Service.csproj" />
   </ItemGroup>
 
 </Project>

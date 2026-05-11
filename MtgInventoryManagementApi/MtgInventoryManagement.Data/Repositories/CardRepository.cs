@@ -43,6 +43,9 @@ public class CardRepository : ICardRepository
     public async Task<Card?> GetByNameAsync(string name)
     {
         return await _context.Cards
+            .Include(c => c.Editions)
+            .Include(c => c.ForeignNames)
+            .Include(c => c.Legalities)
             .FirstOrDefaultAsync(c => c.Name == name);
     }
 
